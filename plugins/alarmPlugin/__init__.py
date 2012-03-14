@@ -5,8 +5,8 @@
 #todo: check for existing alarms, delete alarms, update alarms, add original commands aka wake me up/tomorrow morning/midnight/etc.
 #project: SiriServer
 #commands: set an alarm for HH:MM AM/PM
-#          set an alarm for HH AM/PM
-#          set an alarm for HH AM/PM <called/labeled/named> <[word 1] [word 2] [word 3]>
+# set an alarm for HH AM/PM
+# set an alarm for HH AM/PM <called/labeled/named> <[word 1] [word 2] [word 3]>
 #comments: feel free to email any comments/bug/updates
 
 
@@ -37,13 +37,21 @@ class alarmPlugin(Plugin):
 
     res = {
         'setAlarm': {
-            'en-US': u".*鬧鐘.*(上午|下午|早上|晚上).*(一點|二點|三點|四點|五點|六點|七點|八點|九點|十點|十一點|十二點|\d.*點)"
+            'en-US': u".*鬧鐘.*"
         }
     }
 
     @register("en-US", res['setAlarm']['en-US'])
     def setAlarm(self, speech, language):
-        alarmString = re.findall(ur".*鬧鐘.*(上午|下午|早上|晚上)(\s|)(一點|兩點|三點|四點|五點|六點|七點|八點|九點|十點|十一點|十二點|\d.*點)(\s|)(\d*)(.*)", speech)
+        if (speech.count(u"上午") > 0 and speech.count(u"下午") and speech.count(u"早上") and speech.count(u"晚上") and speech.count(u"點")):
+            alarmString = re.findall(ur".*鬧鐘.*(上午|下午|早上|晚上)(\s|)(一點|兩點|三點|四點|五點|六點|七點|八點|九點|十點|十一點|十二點|\d.*點)(\s|)(\d*)(.*)", speech)
+        else:
+            content_raw = self.ask(u"請問要設定什麼時候?")
+            try:
+                alarmString = re.findall(ur".*(上午|下午|早上|晚上)(\s|)(一點|兩點|三點|四點|五點|六點|七點|八點|九點|十點|十一點|十二點|\d.*點)(\s|)(\d*)(.*)", content_raw)
+            except:
+                self.say(u"{0}對不起我,我不理解你的意思".format(self.user_name()))
+                self.say(u"請用上午九點十分 這種格式")
 
         alarmAMPM = alarmString[0][0]
         alarmHour = alarmString[0][2]
