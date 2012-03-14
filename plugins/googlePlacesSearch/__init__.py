@@ -102,9 +102,7 @@ class googlePlacesSearch(Plugin):
                               googleplaces_results.append(mapitem)
                          else:
                               break
-                    mapsnippet = MapItemSnippet(items=googleplaces_results)
-                    count_min = min(len(response['results']),random_results)
-                    count_max = max(len(response['results']),random_results)
+                    mapsnippet = MapItemSnippet(userCurrentLocation=False, items=googleplaces_results)
                     view = AddViews(self.refId, dialogPhase="Completion")
                     view.views = [AssistantUtteranceView(speakableText = Title + u'顯示於地圖:', dialogIdentifier="googlePlacesMap"), mapsnippet]
                     self.sendRequestWithoutAnswer(view)
