@@ -128,7 +128,7 @@ class smalltalk(Plugin):
         self.complete_request()
 
     @register("en-US", u".*到底是什麼.*")
-    def st_deadbody(self, speech, language):
+    def st_whatsthat(self, speech, language):
         if language == 'en-US':
             self.say(u"這看起來很可能是古代外星人在地球上遺留的記錄")
             self.say(u"哲青，你怎麼看？")
