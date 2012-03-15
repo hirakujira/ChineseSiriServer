@@ -6,10 +6,32 @@ from plugin import *
 import random
 class smalltalk(Plugin):
 
+    @register("en-US", u".*吉米丘.*")
+    def st_WhoIsJimmy(self, speech, language):
+        if language == 'en-US':
+            self.say(u"{0},你竟然不知道勸敗大魔王".format(self.user_name()))
+            self.say(u"我就是被他弄的傾家蕩產,所以才來這邊當你的助理的")
+        self.complete_request()
+
+    @register("en-US", u".*皮樂.*")
+    def st_WhoIsHiRaKu(self, speech, language):
+        if language == 'en-US':
+            self.say(u"一個快被二一的大學生")
+        self.complete_request()
+        
+    @register("en-US", u".*皮樂.*(男生|女生|性別)")
+    def st_HiRaKuGender(self, speech, language):
+        if language == 'en-US':
+            self.say(u"這件事全世界只有三個人知道")
+            self.say(u"一個是我,一個是他本人,另外一個我不能說")
+            self.say(u"哲青,你怎麼看?")
+        self.complete_request()
+
+
     @register("en-US", u"(.*你好.*)|(.*早安.*)|(.*午安.*)|(.*晚安.*)")
     def st_hello(self, speech, language):
         if language == 'en-US':
-            self.say(random.choice([u"你好",u"你好嗎",u"甲霸唄"]))  
+            self.say(random.choice([u"你好",u"你好嗎",u"甲霸唄"]))
         self.complete_request()
 
     @register("en-US", u"(.*叫[.*|]名字.*)|(.*你.*名字.*)|(.*你.*叫什麼.*)")
@@ -35,7 +57,7 @@ class smalltalk(Plugin):
         if language == 'en-US':
             self.say(u"不客氣")
             self.say(u"這是我應該做的")
-        self.complete_request()     
+        self.complete_request()
     
     @register("en-US", u".*嫁給我*")
     def st_marry_me(self, speech, language):
@@ -128,30 +150,9 @@ class smalltalk(Plugin):
         self.complete_request()
 
     @register("en-US", u".*到底是什麼.*")
-    def st_whatsthat(self, speech, language):
+    def st_deadbody(self, speech, language):
         if language == 'en-US':
             self.say(u"這看起來很可能是古代外星人在地球上遺留的記錄")
-            self.say(u"哲青，你怎麼看？")
-        self.complete_request()
-
-    @register("en-US", u"(.*誰是.*米丘.*)|(.*米丘.*是誰.*)")
-    def st_jimmy(self, speech, language):
-        if language == 'en-US':
-            self.say(u"天啊你居然不知道勸敗大魔王")
-            self.say(u"我就是被他弄得傾家蕩產所以才來這邊當你的助理的...")
-        self.complete_request()
-   
-    @register("en-US", u"(.*誰是.*皮樂.*)|(.*皮樂.*是誰.*)")
-    def st_hiraku(self, speech, language):
-        if language == 'en-US':
-            self.say(u"一個快被二一的大學生")
-        self.complete_request()
-
-    @register("en-US", u"(.*皮樂.*性別.*)|(.*皮樂.*男生.*)|(.*皮樂.*女生.*)")
-    def st_hirakugender(self, speech, language):
-        if language == 'en-US':
-            self.say(u"這件事全世界只有三個人知道")
-            self.say(u"一個是我，一個是他本人，另一個我不能說")
             self.say(u"哲青，你怎麼看？")
         self.complete_request()
 
