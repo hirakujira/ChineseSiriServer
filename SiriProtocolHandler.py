@@ -28,8 +28,8 @@ if db.db_type == "mysql":
     import MySQLdb.cursors
 
 class SiriProtocolHandler(Siri):
-    __not_recognized = {"de-DE": u"Entschuldigung, ich verstehe \"{0}\" nicht.", "en-US": u"Sorry I don't understand {0}", "fr-FR": u"Désolé je ne comprends pas ce que \"{0}\" veut dire."}
-    __websearch = {"de-DE": u"Websuche", "en-US": u"Websearch", "fr-FR": u"Rechercher sur le Web"}
+    __not_recognized = {"en-US": u"抱歉，我不知道什麼是 {0}"}
+    __websearch = {"en-US": u"網路搜尋"}
     __scheduling_interval_timeout__ = 60
     __timeout_delay = 20
     
@@ -93,7 +93,7 @@ class SiriProtocolHandler(Siri):
             else:
                 best_match = best_match[0].upper() + best_match[1:]
             best_match_confidence = possible_matches[0]['confidence']
-            self.logger.info(u"Best matching result: \"{0}\" with a confidence of {1}%".format(best_match, round(float(best_match_confidence) * 100, 2)))
+            self.logger.info(u"最佳對應結果: \"{0}\" 信心程度 {1}%".format(best_match, round(float(best_match_confidence) * 100, 2)))
             # construct a SpeechRecognized
             token = Token(best_match, 0, 0, 1000.0, True, True)
             interpretation = Interpretation([token])
