@@ -34,7 +34,7 @@ class definition(Plugin):
             
         query = self.cleanString(speech)
         query_clean = self.cleanString(speech)
-        self.say(u"在字典搜尋 "+speech +u" 中...")
+        
         url = u"http://www.google.com/dictionary/json?callback=dict_api.callbacks.id100&q=" +speech+ "&sl=zh-TW&tl=zh-TW&restrict=pr%2Cde&client=te"
         
         url=url.encode('utf-8')
@@ -51,10 +51,11 @@ class definition(Plugin):
             pass
 
         if definition != None:
+            self.say(u"在字典搜尋 "+speech +u" 中...")
             self.say(definition);
         else:
             if language == 'en-US':
-                self.say(u"抱歉，在字典中找不到 "+query+"...")
+                self.say(u"抱歉，在字典中找不到 "+speech+"...")
         self.complete_request()
         
     def cleanString(self, s):
